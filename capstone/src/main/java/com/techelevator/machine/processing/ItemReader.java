@@ -1,6 +1,7 @@
 package com.techelevator.machine.processing;
 
 import com.techelevator.machine.refreshments.*;
+import com.techelevator.ui.ChangeDrawer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,9 +19,35 @@ public class ItemReader {
     // getters and setters
 
     // methods
-    public static List<Refreshments> getRefreshments(File sourceFile)
+    public static Refreshment getRefreshmentByItemLocation(ChangeDrawer changeDrawer, List<Refreshment> refreshments, String itemLocation)
     {
-        List<Refreshments> refreshments = new ArrayList<Refreshments>();
+        for(Refreshment refreshment : refreshments)
+        {
+            if(refreshment.getSlotLocation().equals(itemLocation))
+            {
+                if(refreshment.inStock())
+                {
+                    if(changeDrawer.balance.compareTo(refreshment.getPrice()) >= 0)
+                    {
+                        refreshment.setQuantity(refreshment.getQuantity() - 1);
+                        changeDrawer.balance.subtract(refreshment.getPrice());
+                        return refreshment;
+                    }
+                    System.out.println("Sorry, you don't have enough money to purchase this item. Please try again.");
+                    return null;
+                }
+
+                System.out.println("Item at " + itemLocation + " is no longer available.");
+                return null;
+            }
+        }
+        System.out.println("Item does not exist. ");
+        return null;
+    }
+
+    public static List<Refreshment> getRefreshments(File sourceFile)
+    {
+        List<Refreshment> refreshments = new ArrayList<Refreshment>();
 
         try(Scanner fileScanner = new Scanner(sourceFile))
         {

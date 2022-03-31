@@ -36,12 +36,14 @@ public class UserInput
     public static String getMoneyInput()
     {
         System.out.println();
-        System.out.println("Enter a valid dollar amount - 1, 2, 5, 10, or 20: ");
-        System.out.println();
+        System.out.println("Enter a valid cash increment - 0.01, 0.05, 0.10, 0.25, 1, 2, 5, 10, or 20: ");
 
         String userEntry = input.nextLine().replaceAll("[$]", "");
-        if(userEntry.equals("1")
-                || userEntry.equals("2")
+        if(userEntry.equals("0.01")
+                || userEntry.equals("0.05")
+                || userEntry.equals("0.10")
+                || userEntry.equals("0.25")
+                || userEntry.equals("1")
                 || userEntry.equals("5")
                 || userEntry.equals("10")
                 || userEntry.equals("20"))
@@ -52,6 +54,14 @@ public class UserInput
         {
             return "Invalid dollar amount.";
         }
+    }
+
+    public static String getItemSelection()
+    {
+        System.out.println();
+        System.out.println("Enter the slot location of the item you would like to purchase. ");
+
+        return input.nextLine().trim().toLowerCase().substring(0,2);
     }
 
 }

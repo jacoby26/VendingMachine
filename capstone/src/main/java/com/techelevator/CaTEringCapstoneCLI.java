@@ -1,7 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.machine.processing.ItemReader;
-import com.techelevator.machine.refreshments.Refreshments;
+import com.techelevator.machine.refreshments.Refreshment;
 import com.techelevator.ui.ChangeDrawer;
 import com.techelevator.ui.Transaction;
 import com.techelevator.ui.UserInput;
@@ -9,6 +9,7 @@ import com.techelevator.view.Menu;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CaTEringCapstoneCLI
@@ -16,6 +17,7 @@ public class CaTEringCapstoneCLI
 
 	private static final String sourceFileName = "catering.csv";
 	ChangeDrawer changeDrawer = new ChangeDrawer();
+	List<Refreshment> refreshments = new ArrayList<Refreshment>();
 
 	private Menu menu;
 
@@ -60,9 +62,9 @@ public class CaTEringCapstoneCLI
 	private void displayItems()
 	{
 		File sourceFile = new File(sourceFileName);
-		List<Refreshments> refreshments = ItemReader.getRefreshments(sourceFile);
+		refreshments = ItemReader.getRefreshments(sourceFile);
 
-		for (Refreshments refreshment : refreshments)
+		for (Refreshment refreshment : refreshments)
 		{
 			int quantity = refreshment.getQuantity();
 			String stringQuantity = "";
@@ -105,6 +107,16 @@ public class CaTEringCapstoneCLI
 		}
 		else if (choice.equals("s"))
 		{
+			try
+			{
+				String input = UserInput.getItemSelection();
+
+			}
+			catch (Exception e)
+			{
+				displayPurchaseMenu();
+				return;
+			}
 			displayPurchaseMenu();
 		}
 		else if (choice.equals("f"))

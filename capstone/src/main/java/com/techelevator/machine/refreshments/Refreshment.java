@@ -4,7 +4,7 @@ import com.techelevator.interfaces.Purchasable;
 
 import java.math.BigDecimal;
 
-public abstract class Refreshments implements Purchasable
+public abstract class Refreshment implements Purchasable
 {
     // attributes
     private String slotLocation;
@@ -14,11 +14,11 @@ public abstract class Refreshments implements Purchasable
     private int quantity = 7;
 
     // constructors
-    public Refreshments()
+    public Refreshment()
     {
     }
 
-    public Refreshments(String slotLocation, String name, BigDecimal price, String type)
+    public Refreshment(String slotLocation, String name, BigDecimal price, String type)
     {
         this.slotLocation = slotLocation;
         this.name = name;

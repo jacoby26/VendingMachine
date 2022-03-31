@@ -2,7 +2,7 @@ package com.techelevator.machine.refreshments;
 
 import java.math.BigDecimal;
 
-public class Drink extends Refreshments
+public class Drink extends Refreshment
 {
     // constructors
     public Drink(String slotLocation, String itemName, BigDecimal price, String type)

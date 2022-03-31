@@ -1,12 +1,14 @@
 package com.techelevator.ui;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 public class ChangeDrawer {
     static BigDecimal zero = new BigDecimal(0);
+    static MathContext m = new MathContext(2);
 
     // attributes
-    private static BigDecimal balance = zero;
+    public static BigDecimal balance = zero;
 
     // constructors
     public ChangeDrawer()
@@ -23,7 +25,8 @@ public class ChangeDrawer {
     {
         if (transaction.isMoneyIn())
         {
-            balance.add(transaction.getDollarAmount());
+
+            balance = balance.add(transaction.getDollarAmount()).round(m);
             System.out.println("Current balance: " + balance);
         }
 
@@ -38,7 +41,8 @@ public class ChangeDrawer {
 
         if (pending.compareTo(zero) >= 0)
         {
-            change = balance.subtract(transaction.getDollarAmount());
+            MathContext m = new MathContext(2);
+            change = balance.subtract(transaction.getDollarAmount()).round(m);
         }
 
         System.out.println("Your change is $" + change);

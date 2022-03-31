@@ -2,7 +2,7 @@ package com.techelevator.machine.refreshments;
 
 import java.math.BigDecimal;
 
-public class Munchy extends Refreshments
+public class Munchy extends Refreshment
 {
     // constructors
 
