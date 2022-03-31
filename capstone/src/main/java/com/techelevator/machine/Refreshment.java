@@ -9,7 +9,7 @@ public abstract class Refreshment implements Puchasable
     // attributes
     private String slotLocation;
     private String name;
-    private String category;
+    private String type;
     private BigDecimal price;
     private int quantity = 7;
 
@@ -17,12 +17,12 @@ public abstract class Refreshment implements Puchasable
     public Refreshment()
     {
     }
-    public Refreshment(String slotLocation, String name, String category, BigDecimal price)
+    public Refreshment(String slotLocation, String name, BigDecimal price, String type)
     {
         this.slotLocation = slotLocation;
         this.name = name;
-        this.category = category;
         this.price = price;
+        this.type = type;
     }
 
     // getters and setters
@@ -35,8 +35,8 @@ public abstract class Refreshment implements Puchasable
         return name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getType() {
+        return type;
     }
 
     public BigDecimal getPrice() {
