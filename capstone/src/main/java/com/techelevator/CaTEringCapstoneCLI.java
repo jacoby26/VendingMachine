@@ -1,8 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.ui.UserInput;
 import com.techelevator.view.Menu;
 
-public class CaTEringCapstoneCLI {
+public class CaTEringCapstoneCLI
+{
 
 
 
@@ -18,10 +20,11 @@ public class CaTEringCapstoneCLI {
 		cli.run();
 	}
 
-	public void run() {
-		while (true) {
-			//  to do -- build out main menu
-
+	public void run()
+	{
+		while (true)
+		{
+			String choice = UserInput.getHomeScreenChoice();
 		}
 	}
 }
