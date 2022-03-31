@@ -12,16 +12,16 @@ public class Transaction {
     private Purchasable purchasable;
 
     // constructors
-    public Transaction(boolean inOrOut, BigDecimal dollarAmount)
+    public Transaction(boolean isMoneyIn, BigDecimal dollarAmount)
     {
-        this.isMoneyIn = inOrOut;
+        this.isMoneyIn = isMoneyIn;
         this.dollarAmount = dollarAmount;
         this.purchasable = null;
     }
 
-    public Transaction(boolean inOrOut, BigDecimal dollarAmount, Purchasable purchasable)
+    public Transaction(boolean isMoneyIn, BigDecimal dollarAmount, Purchasable purchasable)
     {
-        this.isMoneyIn = inOrOut;
+        this.isMoneyIn = isMoneyIn;
         this.dollarAmount = dollarAmount;
         this.purchasable = purchasable;
     }

@@ -15,7 +15,7 @@ public class CaTEringCapstoneCLI
 {
 
 	private static final String sourceFileName = "catering.csv";
-
+	ChangeDrawer changeDrawer = new ChangeDrawer();
 
 	private Menu menu;
 
@@ -90,7 +90,17 @@ public class CaTEringCapstoneCLI
 
 		if (choice.equals("m"))
 		{
-			displayItems();
+			try
+			{
+				double input = Double.parseDouble(UserInput.getMoneyInput());
+				Transaction transaction = new Transaction(true, BigDecimal.valueOf(input));
+				changeDrawer.putMoney(transaction);
+			}
+			catch (Exception e)
+			{
+				displayPurchaseMenu();
+				return;
+			}
 			displayPurchaseMenu();
 		}
 		else if (choice.equals("s"))
@@ -100,7 +110,7 @@ public class CaTEringCapstoneCLI
 		else if (choice.equals("f"))
 		{
 			Transaction transaction = new Transaction(false, BigDecimal.valueOf(0));
-			ChangeDrawer.giveChange(transaction);
+			changeDrawer.giveChange(transaction);
 			run();
 		}
 		else

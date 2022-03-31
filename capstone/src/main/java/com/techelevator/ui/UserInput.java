@@ -26,10 +26,32 @@ public class UserInput
         System.out.println("(S) Select Item ");
         System.out.println("(F) Finish Transaction ");
         System.out.println();
+        System.out.println("Your current balance is: " + String.valueOf(ChangeDrawer.getBalance()));
+        System.out.println();
         System.out.print("Please select an option ");
 
         return input.nextLine().trim().toLowerCase().substring(0,1);
     }
 
+    public static String getMoneyInput()
+    {
+        System.out.println();
+        System.out.println("Enter a valid dollar amount - 1, 2, 5, 10, or 20: ");
+        System.out.println();
+
+        String userEntry = input.nextLine().replaceAll("[$]", "");
+        if(userEntry.equals("1")
+                || userEntry.equals("2")
+                || userEntry.equals("5")
+                || userEntry.equals("10")
+                || userEntry.equals("20"))
+        {
+            return userEntry;
+        }
+        else
+        {
+            return "Invalid dollar amount.";
+        }
+    }
 
 }
