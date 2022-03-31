@@ -8,4 +8,5 @@ public interface Purchasable {
     public String getType();
     public BigDecimal getPrice();
     public int getQuantity();
+    public void printMessage();
 }

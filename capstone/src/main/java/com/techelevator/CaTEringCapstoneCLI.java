@@ -11,13 +11,15 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class CaTEringCapstoneCLI
 {
 
 	private static final String sourceFileName = "catering.csv";
 	ChangeDrawer changeDrawer = new ChangeDrawer();
-	List<Refreshment> refreshments = new ArrayList<Refreshment>();
+	File sourceFile = new File(sourceFileName);
+	List<Refreshment> refreshments = ItemReader.getRefreshments(sourceFile);
 
 	private Menu menu;
 
@@ -61,8 +63,6 @@ public class CaTEringCapstoneCLI
 
 	private void displayItems()
 	{
-		File sourceFile = new File(sourceFileName);
-		refreshments = ItemReader.getRefreshments(sourceFile);
 
 		for (Refreshment refreshment : refreshments)
 		{
@@ -109,7 +109,15 @@ public class CaTEringCapstoneCLI
 		{
 			try
 			{
+				displayItems();
 				String input = UserInput.getItemSelection();
+				Refreshment refreshment = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, input);
+				if (!refreshment.equals(null))
+				{
+					Transaction transaction = new Transaction(true, refreshment.getPrice(), refreshment);
+					changeDrawer.buyProduct(transaction);
+					refreshment.setQuantity(refreshment.getQuantity() - 1);
+				}
 
 			}
 			catch (Exception e)

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ItemReader {
@@ -23,14 +24,12 @@ public class ItemReader {
     {
         for(Refreshment refreshment : refreshments)
         {
-            if(refreshment.getSlotLocation().equals(itemLocation))
+            if(refreshment.getSlotLocation().equalsIgnoreCase(itemLocation))
             {
                 if(refreshment.inStock())
                 {
                     if(changeDrawer.balance.compareTo(refreshment.getPrice()) >= 0)
                     {
-                        refreshment.setQuantity(refreshment.getQuantity() - 1);
-                        changeDrawer.balance.subtract(refreshment.getPrice());
                         return refreshment;
                     }
                     System.out.println("Sorry, you don't have enough money to purchase this item. Please try again.");

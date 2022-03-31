@@ -36,7 +36,9 @@ public class UserInput
     public static String getMoneyInput()
     {
         System.out.println();
-        System.out.println("Enter a valid cash increment - 0.01, 0.05, 0.10, 0.25, 1, 2, 5, 10, or 20: ");
+        System.out.println("Enter an accepted cash tender");
+        System.out.println("Change : 0.01, 0.05, 0.10, 0.25 ");
+        System.out.println("Dollar : 1, 2, 5, 10, or 20 ");
 
         String userEntry = input.nextLine().replaceAll("[$]", "");
         if(userEntry.equals("0.01")
