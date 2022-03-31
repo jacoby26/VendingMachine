@@ -19,5 +19,17 @@ public class UserInput
         return input.nextLine().trim().toLowerCase().substring(0,1);
     }
 
+    public static String getPurchasingScreenChoice()
+    {
+        System.out.println();
+        System.out.println("(M) Feed Money ");
+        System.out.println("(S) Select Item ");
+        System.out.println("(F) Finish Transaction ");
+        System.out.println();
+        System.out.print("Please select an option ");
+
+        return input.nextLine().trim().toLowerCase().substring(0,1);
+    }
+
 
 }

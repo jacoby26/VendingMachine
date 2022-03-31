@@ -1,10 +1,10 @@
-package com.techelevator.machine;
+package com.techelevator.machine.refreshments;
 
-import com.techelevator.interfaces.Puchasable;
+import com.techelevator.interfaces.Purchasable;
 
 import java.math.BigDecimal;
 
-public abstract class Refreshment implements Puchasable
+public abstract class Refreshments implements Purchasable
 {
     // attributes
     private String slotLocation;
@@ -14,10 +14,11 @@ public abstract class Refreshment implements Puchasable
     private int quantity = 7;
 
     // constructors
-    public Refreshment()
+    public Refreshments()
     {
     }
-    public Refreshment(String slotLocation, String name, BigDecimal price, String type)
+
+    public Refreshments(String slotLocation, String name, BigDecimal price, String type)
     {
         this.slotLocation = slotLocation;
         this.name = name;

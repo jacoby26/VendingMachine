@@ -1,8 +1,8 @@
-package com.techelevator.machine;
+package com.techelevator.machine.refreshments;
 
 import java.math.BigDecimal;
 
-public class Drink extends Refreshment
+public class Drink extends Refreshments
 {
     // constructors
     public Drink(String slotLocation, String itemName, BigDecimal price, String type)

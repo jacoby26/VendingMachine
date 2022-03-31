@@ -1,8 +1,8 @@
-package com.techelevator.machine;
+package com.techelevator.machine.refreshments;
 
 import java.math.BigDecimal;
 
-public class Munchy extends Refreshment
+public class Munchy extends Refreshments
 {
     // constructors
 

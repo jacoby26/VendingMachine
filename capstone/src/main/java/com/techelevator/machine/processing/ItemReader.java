@@ -1,10 +1,9 @@
-package com.techelevator.machine;
+package com.techelevator.machine.processing;
 
-import com.techelevator.interfaces.Puchasable;
+import com.techelevator.machine.refreshments.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +18,9 @@ public class ItemReader {
     // getters and setters
 
     // methods
-    public static List<Refreshment> getRefreshments(File sourceFile)
+    public static List<Refreshments> getRefreshments(File sourceFile)
     {
-        List<Refreshment> refreshments = new ArrayList<Refreshment>();
+        List<Refreshments> refreshments = new ArrayList<Refreshments>();
 
         try(Scanner fileScanner = new Scanner(sourceFile))
         {
