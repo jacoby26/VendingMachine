@@ -1,5 +1,7 @@
 package com.techelevator.machine;
 
+import com.techelevator.interfaces.Puchasable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Reader;
@@ -17,7 +19,7 @@ public class ItemReader {
     // getters and setters
 
     // methods
-    public List<Refreshment> getRefreshments(File sourceFile)
+    public static List<Refreshment> getRefreshments(File sourceFile)
     {
         List<Refreshment> refreshments = new ArrayList<Refreshment>();
 
@@ -31,8 +33,11 @@ public class ItemReader {
 
                     String slotLocation = properties[0];
                     String itemName = properties[1];
-                    BigDecimal price = BigDecimal.valueOf(Double.parseDouble(properties[2]));
-                    String type = properties[3];
+                    String type = properties[2];
+                    String stringPrice = properties[3];
+                    BigDecimal price = new BigDecimal(stringPrice);
+
+
 
 //                    Object object = new Object();
 //

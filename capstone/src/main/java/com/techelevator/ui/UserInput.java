@@ -14,7 +14,7 @@ public class UserInput
         System.out.println("(P) Purchase");
         System.out.println("(E) Exit");
         System.out.println();
-        System.out.print("Please select an option");
+        System.out.print("Please select an option ");
 
         return input.nextLine().trim().toLowerCase().substring(0,1);
     }
