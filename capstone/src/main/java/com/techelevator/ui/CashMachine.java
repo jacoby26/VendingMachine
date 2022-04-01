@@ -39,63 +39,77 @@ public class CashMachine {
     {
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
 
-        if (pending.compareTo(ZERO) >= 0)
+        if (!transaction.isMoneyIn())
         {
-            balance = balance.subtract(transaction.getDollarAmount());
+            if (transaction.getPurchasable() != null)
+            {
+                if (pending.compareTo(ZERO) >= 0)
+                {
+                    balance = balance.subtract(transaction.getDollarAmount());
+                    System.out.println(transaction.getPurchasable().getName());
+                    System.out.println("Price $" + transaction.getPurchasable().getPrice());
+                    System.out.println("Your current balance is $" + balance);
+                    System.out.println(transaction.getPurchasable().printMessage());
+                    // giveChange(transaction);
+                    Log log = new Log(transaction, balance);
+                    log.writeLogEntry();
+                }
+            }
+            else
+            {
+                return balance;
+            }
         }
 
-        if (!transaction.getPurchasable().equals(null))
-        {
-            System.out.println(transaction.getPurchasable().getName());
-            System.out.println("Price $" + transaction.getPurchasable().getPrice());
-            System.out.println("Your current balance is $" + balance);
-            System.out.println(transaction.getPurchasable().printMessage());
-            // giveChange(transaction);
-            Log log = new Log(transaction, balance);
-            log.writeLogEntry();
-        }
         return balance;
     }
 
     // methods
     public static BigDecimal giveChange(Transaction transaction)
     {
+        // the pending variable is used here
+        // for if in the future a transaction with dollar amount greater than zero
+        // is ever passed into this function
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
         BigDecimal change = ZERO;
 
-        if (pending.compareTo(ZERO) >= 0)
+        if (!transaction.isMoneyIn() && transaction.getDollarAmount().equals(BigDecimal.valueOf(0)))
         {
-            change = balance.subtract(transaction.getDollarAmount());
+            if (pending.compareTo(ZERO) >= 0)
+            {
+                change = balance.subtract(transaction.getDollarAmount());
+
+                System.out.println("Your change is $" + change);
+
+                int dollars = (int)Math.floor(Double.parseDouble(balance.toString()));
+                BigDecimal coinChange = change.subtract(new BigDecimal(dollars));
+
+                // converting fractional dollar amount into whole number
+                // so BigDecimal math can be done easier
+                coinChange = coinChange.multiply(new BigDecimal(100));
+
+                int quarters = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(25)).toString()));
+                coinChange = coinChange.remainder(new BigDecimal(25));
+
+                int dimes = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(10)).toString()));
+                coinChange = coinChange.remainder(new BigDecimal(10));
+
+                int nickels = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(5)).toString()));
+
+                System.out.println("You have received " +
+                        dollars + " dollars, " +
+                        quarters + " quarters, " +
+                        dimes + " dimes, and " +
+                        nickels + " nickels.");
+
+                balance = ZERO;
+                Transaction changeGiven = new Transaction(false, change);
+                Log log = new Log(changeGiven, balance);
+                log.writeLogEntry();
+            }
+
+            return change;
         }
-
-        System.out.println("Your change is $" + change);
-
-        int dollars = (int)Math.floor(Double.parseDouble(balance.toString()));
-        BigDecimal coinChange = change.subtract(new BigDecimal(dollars));
-
-        // converting fractional dollar amount into whole number
-        // so BigDecimal math can be done easier
-        coinChange = coinChange.multiply(new BigDecimal(100));
-
-        int quarters = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(25)).toString()));
-        coinChange = coinChange.remainder(new BigDecimal(25));
-
-        int dimes = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(10)).toString()));
-        coinChange = coinChange.remainder(new BigDecimal(10));
-
-        int nickels = (int)Math.floor(Double.parseDouble(coinChange.divide(new BigDecimal(5)).toString()));
-
-        System.out.println("You have received " +
-                dollars + " dollars, " +
-                quarters + " quarters, " +
-                dimes + " dimes, and " +
-                nickels + " nickels.");
-
-        balance = ZERO;
-        Transaction changeGiven = new Transaction(false, change);
-        Log log = new Log(changeGiven, balance);
-        log.writeLogEntry();
-
-        return change;
+        return ZERO;
     }
 }

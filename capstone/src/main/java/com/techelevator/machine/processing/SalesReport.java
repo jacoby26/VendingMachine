@@ -9,11 +9,11 @@ import java.util.List;
 public class SalesReport
 {
     private static final String SALES_REPORT_PATH = "salesreport.csv";
-    private File salesReportFile = new File(SALES_REPORT_PATH);
+    private static File salesReportFile = new File(SALES_REPORT_PATH);
 
     // attributes
-    private String name;
-    private int quantity;
+    private static String name;
+    private static int quantity;
 
     // constructors
     public SalesReport(String name, int quantity)
@@ -23,11 +23,11 @@ public class SalesReport
     }
 
     // getters and setters
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
-    public int getQuantity() {
+    public static int getQuantity() {
         return quantity;
     }
 
@@ -54,7 +54,7 @@ public class SalesReport
         return salesReportList;
     }
 
-    public void writeSalesReport(List<SalesReport> salesReportList)
+    public static void writeSalesReport(List<SalesReport> salesReportList)
     {
         if(!salesReportFile.exists())
         {
