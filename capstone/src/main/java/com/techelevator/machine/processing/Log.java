@@ -71,40 +71,35 @@ public class Log
 
     public void writeLogEntry()
     {
-        if(!auditFile.exists())
-        {
-            try
-            {
+        if(!auditFile.exists()) {
+            try {
                 // need to add headers to csv
 
                 auditFile.createNewFile();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
 
-            try (
-                    FileWriter fileWriter = new FileWriter(auditFile, true);
-                    PrintWriter writer = new PrintWriter(fileWriter)
-            )
-            {
-                String logEntry = getTimestamp() + "," +
-                                getNote() + "," +
-                                getSlotLocation() + "," +
-                                getTransactionAmount() + "," +
-                                getEndBalance() + "\n";
+        try (
+                FileWriter fileWriter = new FileWriter(auditFile, true);
+                PrintWriter writer = new PrintWriter(fileWriter)
+        )
+        {
+            String logEntry = getTimestamp() + "," +
+                            getNote() + "   " + getSlotLocation() + "," +
+                            getTransactionAmount() + "," +
+                            getEndBalance() + "\n";
 
-                writer.println(logEntry);
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            writer.println(logEntry);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 }
