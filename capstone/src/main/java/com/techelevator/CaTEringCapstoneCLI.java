@@ -9,16 +9,14 @@ import com.techelevator.view.Menu;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 public class CaTEringCapstoneCLI
 {
 
-	private static final String sourceFileName = "catering.csv";
+	private static final String SOURCE_FILE_NAME = "catering.csv";
 	ChangeDrawer changeDrawer = new ChangeDrawer();
-	File sourceFile = new File(sourceFileName);
+	File sourceFile = new File(SOURCE_FILE_NAME);
 	List<Refreshment> refreshments = ItemReader.getRefreshments(sourceFile);
 
 	private Menu menu;
@@ -79,8 +77,7 @@ public class CaTEringCapstoneCLI
 
 			String output = refreshment.getSlotLocation() + ") " +
 					refreshment.getName() + " | $" +
-					refreshment.getPrice() + " | " +
-					refreshment.getType() + " | Quantity: " +
+					refreshment.getPrice() + " | Quantity: " +
 					stringQuantity;
 			System.out.println(output);
 		}

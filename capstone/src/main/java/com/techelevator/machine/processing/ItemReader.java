@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class ItemReader {
     // attributes
-    private String sourceFile;
 
     // constructors
 
@@ -61,32 +60,6 @@ public class ItemReader {
                     String type = properties[2];
                     String stringPrice = properties[3];
                     BigDecimal price = new BigDecimal(stringPrice);
-
-
-
-//                    Object object = new Object();
-//
-//                    Class<?> getType;
-//                    try {
-//                        getType = Class.forName(type);
-//                        if (type.getClass().isAssignableFrom(getType))
-//                        {
-//                            getType.cast(object);
-//
-//                            if (getType.isInstance())
-//                            {
-//                                getType.getConstructors();
-//                            }
-//                        }
-//                        else
-//                        {
-//                            throw new IllegalArgumentException();
-//                        }
-//                    } catch (ClassNotFoundException e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-
 
                     if (type.equals("Munchy"))
                     {

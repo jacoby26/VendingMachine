@@ -1,21 +1,21 @@
 package com.techelevator.ui;
 
+import com.techelevator.machine.processing.Log;
 import com.techelevator.machine.refreshments.Refreshment;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
 public class ChangeDrawer {
-    static BigDecimal zero = new BigDecimal(0);
-    static MathContext m = new MathContext(2);
+    static final BigDecimal ZERO = new BigDecimal(0);
 
     // attributes
-    public static BigDecimal balance = zero;
+    public static BigDecimal balance = ZERO;
 
     // constructors
     public ChangeDrawer()
     {
-        this.balance = zero;
+        this.balance = ZERO;
     }
 
     // getters & setters
@@ -27,9 +27,10 @@ public class ChangeDrawer {
     {
         if (transaction.isMoneyIn())
         {
-
             balance = balance.add(transaction.getDollarAmount());
             System.out.println("Current balance: " + balance);
+            Log log = new Log(transaction, balance);
+            log.writeLogEntry();
         }
 
         return balance;
@@ -39,9 +40,8 @@ public class ChangeDrawer {
     {
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
 
-        if (pending.compareTo(zero) >= 0)
+        if (pending.compareTo(ZERO) >= 0)
         {
-            MathContext m = new MathContext(2);
             balance = balance.subtract(transaction.getDollarAmount());
         }
 
@@ -52,23 +52,26 @@ public class ChangeDrawer {
             System.out.println("Your current balance is $" + balance);
             System.out.println(transaction.getPurchasable().printMessage());
             // giveChange(transaction);
+            Log log = new Log(transaction, balance);
+            log.writeLogEntry();
         }
     }
 
     // methods
-    public static Transaction giveChange(Transaction transaction)
+    public static void giveChange(Transaction transaction)
     {
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
-        BigDecimal change = zero;
+        BigDecimal change = ZERO;
 
-        if (pending.compareTo(zero) >= 0)
+        if (pending.compareTo(ZERO) >= 0)
         {
-            MathContext m = new MathContext(2);
             change = balance.subtract(transaction.getDollarAmount());
         }
 
         System.out.println("Your change is $" + change);
-        balance = zero;
-        return new Transaction(false, change);
+        balance = ZERO;
+        Transaction changeGiven = new Transaction(false, change);
+        Log log = new Log(changeGiven, balance);
+        log.writeLogEntry();
     }
 }
