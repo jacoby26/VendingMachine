@@ -15,6 +15,6 @@ public class Munchy extends Refreshment
     @Override
     public String printMessage()
     {
-        return "Munchy, Munchy so Good!";
+        return "Munchy, Munchy, so Good!";
     }
 }
