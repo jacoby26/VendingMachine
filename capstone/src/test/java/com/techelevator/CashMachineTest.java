@@ -124,7 +124,7 @@ public class CashMachineTest {
         CashMachine cashMachine = new CashMachine();
         cashMachine.putMoney(transaction);
         BigDecimal expected = new BigDecimal(initial).subtract(refreshment.getPrice());
-        String message = "Changed balance on a purchase with not enough money to make purchase";
+        String message = "Didn't change balance after a valid purchase was made.";
 
         //act
         transaction = new Transaction(false, refreshment.getPrice(), refreshment);

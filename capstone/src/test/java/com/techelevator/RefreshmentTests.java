@@ -67,7 +67,7 @@ public class RefreshmentTests {
     public void when_itemIsSandwich_expect_SandwichPrintMessage()
     {
         // arrange
-        Refreshment refreshment = new Sandwich("A6", "testmunchy", new BigDecimal(4.20), "Sandwich");
+        Refreshment refreshment = new Sandwich("A6", "testsandwich", new BigDecimal(4.20), "Sandwich");
         String expected = "Sandwich So Delicious, Yum!";
         String message = "Error - failing to display proper sandwich print message.";
 
@@ -82,7 +82,7 @@ public class RefreshmentTests {
     public void when_itemIsDrink_expect_DrinkPrintMessage()
     {
         // arrange
-        Refreshment refreshment = new Drink("A6", "testmunchy", new BigDecimal(4.20), "Drink");
+        Refreshment refreshment = new Drink("A6", "testdrink", new BigDecimal(4.20), "Drink");
         String expected = "Drinky, Drinky, Slurp Slurp!";
         String message = "Error - failing to display proper drink print message.";
 
@@ -97,9 +97,9 @@ public class RefreshmentTests {
     public void when_itemIsDessert_expect_DessertPrintMessage()
     {
         // arrange
-        Refreshment refreshment = new Dessert("A6", "testmunchy", new BigDecimal(4.20), "Dessert");
+        Refreshment refreshment = new Dessert("A6", "testdessert", new BigDecimal(4.20), "Dessert");
         String expected = "Sugar, Sugar, so Sweet!";
-        String message = "Error - failing to display proper drink print message.";
+        String message = "Error - failing to display proper dessert print message.";
 
         // act
         String actual = refreshment.printMessage();
