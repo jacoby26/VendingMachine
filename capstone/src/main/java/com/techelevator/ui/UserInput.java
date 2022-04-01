@@ -7,8 +7,7 @@ public class UserInput
     private static final Scanner input = new Scanner(System.in);
 
 
-    public static String getHomeScreenChoice()
-    {
+    public static String getHomeScreenChoice() {
         System.out.println();
         System.out.println("(D) Display caTEring Items");
         System.out.println("(P) Purchase");
@@ -16,7 +15,7 @@ public class UserInput
         System.out.println();
         System.out.print("Please select an option ");
 
-        return input.nextLine().trim().toLowerCase().substring(0,1);
+        return input.nextLine().trim().toLowerCase().substring(0, 1);
     }
 
     public static String getPurchasingScreenChoice()
@@ -30,7 +29,9 @@ public class UserInput
         System.out.println();
         System.out.print("Please select an option ");
 
+
         return input.nextLine().trim().toLowerCase().substring(0,1);
+
     }
 
     public static String getMoneyInput()
@@ -38,7 +39,7 @@ public class UserInput
         System.out.println();
         System.out.println("Enter an accepted cash tender");
         System.out.println("Change : 0.01, 0.05, 0.10, 0.25 ");
-        System.out.println("Dollar : 1, 2, 5, 10, or 20 ");
+        System.out.println("Dollar : 1, 5, 10, or 20 ");
 
         String userEntry = input.nextLine().replaceAll("[$]", "");
         if(userEntry.equals("0.01")
