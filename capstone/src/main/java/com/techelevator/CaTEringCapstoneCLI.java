@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.machine.processing.ItemReader;
+import com.techelevator.machine.processing.SalesReport;
 import com.techelevator.machine.refreshments.Refreshment;
 import com.techelevator.ui.ChangeDrawer;
 import com.techelevator.ui.Transaction;
@@ -9,7 +10,10 @@ import com.techelevator.view.Menu;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.techelevator.machine.processing.SalesReport.getRefreshmentsSalesReportList;
 
 public class CaTEringCapstoneCLI
 {
@@ -18,6 +22,7 @@ public class CaTEringCapstoneCLI
 	ChangeDrawer changeDrawer = new ChangeDrawer();
 	File sourceFile = new File(SOURCE_FILE_NAME);
 	List<Refreshment> refreshments = ItemReader.getRefreshments(sourceFile);
+	List<Transaction> transactions = new ArrayList<Transaction>();
 
 	private Menu menu;
 
@@ -49,6 +54,10 @@ public class CaTEringCapstoneCLI
 			else if (choice.equals("e"))
 			{
 				break;
+			}
+			else if (choice.equals("s"))
+			{
+				List<SalesReport> salesReportList = getRefreshmentsSalesReportList(refreshments, transactions);
 			}
 			else
 			{
@@ -93,6 +102,7 @@ public class CaTEringCapstoneCLI
 			{
 				double input = Double.parseDouble(UserInput.getMoneyInput());
 				Transaction transaction = new Transaction(true, BigDecimal.valueOf(input));
+				transactions.add(transaction);
 				changeDrawer.putMoney(transaction);
 			}
 			catch (Exception e)
@@ -113,6 +123,7 @@ public class CaTEringCapstoneCLI
 				{
 					Transaction transaction = new Transaction(true, refreshment.getPrice(), refreshment);
 					changeDrawer.buyProduct(transaction);
+					transactions.add(transaction);
 					refreshment.setQuantity(refreshment.getQuantity() - 1);
 				}
 
@@ -128,6 +139,7 @@ public class CaTEringCapstoneCLI
 		{
 			Transaction transaction = new Transaction(false, BigDecimal.valueOf(0));
 			changeDrawer.giveChange(transaction);
+			transactions.add(transaction);
 			run();
 		}
 		else
