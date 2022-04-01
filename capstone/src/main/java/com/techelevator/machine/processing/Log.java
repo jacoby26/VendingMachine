@@ -70,8 +70,6 @@ public class Log
     {
         if(!auditFile.exists()) {
             try {
-                // need to add headers to csv
-
                 auditFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -80,7 +78,8 @@ public class Log
 
         try (
                 FileWriter fileWriter = new FileWriter(auditFile, true);
-                PrintWriter writer = new PrintWriter(fileWriter)
+                PrintWriter writer = new PrintWriter(fileWriter);
+
         )
         {
             String logEntry = getTimestamp() + "," +

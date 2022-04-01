@@ -11,6 +11,7 @@ import com.techelevator.view.Menu;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.techelevator.machine.processing.SalesReport.getRefreshmentsSalesReportList;
@@ -57,7 +58,8 @@ public class CaTEringCapstoneCLI
 			}
 			else if (choice.equals("s"))
 			{
-				List<SalesReport> salesReportList = getRefreshmentsSalesReportList(refreshments, transactions);
+				HashMap<String, Integer> salesReport = getRefreshmentsSalesReportList(refreshments, transactions);
+				SalesReport.writeSalesReport(salesReport);
 			}
 			else
 			{

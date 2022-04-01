@@ -3,12 +3,16 @@ package com.techelevator.machine.processing;
 import com.techelevator.machine.refreshments.Refreshment;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SalesReport
 {
-    private static final String SALES_REPORT_PATH = "salesreport.csv";
+    private static final String localDate = LocalDate.now().toString();
+    private static final String SALES_REPORT_PATH = "salesreport" + localDate + ".csv";
     private static File salesReportFile = new File(SALES_REPORT_PATH);
 
     // attributes
@@ -32,35 +36,46 @@ public class SalesReport
     }
 
     // methods
-    public static List<SalesReport> getRefreshmentsSalesReportList(List<Refreshment> refreshments, List<Transaction> transactions)
+    public static HashMap<String, Integer> getRefreshmentsSalesReportList(List<Refreshment> refreshments, List<Transaction> transactions)
     {
-        List<SalesReport> salesReportList = new ArrayList<>();
+        // List<SalesReport> salesReportList = new ArrayList<>();
+        HashMap<String, Integer> salesReport = new HashMap<>();
 
         for (Refreshment refreshment : refreshments)
         {
             int count = 0;
             for (Transaction transaction : transactions)
             {
-                if (transaction.getPurchasable().getName().equals(refreshment.getName()))
+                try
                 {
-                    count++;
+                    if (transaction.getPurchasable().getName().equals(refreshment.getName()))
+                    {
+                        count++;
+                    }
+                }
+                catch (NullPointerException e)
+                {
+                    // do nothing
                 }
             }
 
-            SalesReport salesReport = new SalesReport(refreshment.getName(), count);
-            salesReportList.add(salesReport);
+            String key = refreshment.getName();
+            int value = count;
+            salesReport.put(key, value);
+
+            //SalesReport salesReport = new SalesReport(refreshment.getName(), count);
+            //salesReportList.add(salesReport);
         }
 
-        return salesReportList;
+        return salesReport;
+        //return salesReportList;
     }
 
-    public static void writeSalesReport(List<SalesReport> salesReportList)
+    public static void writeSalesReport(HashMap<String, Integer> salesReport)
     {
         if(!salesReportFile.exists())
         {
             try {
-                // need to add headers to csv
-
                 salesReportFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -68,15 +83,15 @@ public class SalesReport
         }
 
         try (
-                FileWriter fileWriter = new FileWriter(salesReportFile, false);
+                FileWriter fileWriter = new FileWriter(salesReportFile, true);
                 PrintWriter writer = new PrintWriter(fileWriter)
         )
         {
-            for (SalesReport salesReport: salesReportList)
-            {
-                String reportEntry = getName() + getQuantity() + "\n";
+            salesReport.forEach((key, value) -> {
+
+                String reportEntry = key + "," + value;
                 writer.println(reportEntry);
-            }
+            });
         }
         catch (FileNotFoundException e)
         {

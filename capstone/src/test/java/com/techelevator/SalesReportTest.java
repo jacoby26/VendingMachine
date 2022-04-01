@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SalesReportTest {
@@ -32,8 +33,8 @@ public class SalesReportTest {
         String message = "Oops! Log file does not exist";
 
         // act
-        List<SalesReport> salesReportList = SalesReport.getRefreshmentsSalesReportList(refreshments, transactions);
-        SalesReport.writeSalesReport(salesReportList);
+        HashMap<String, Integer> salesReport = SalesReport.getRefreshmentsSalesReportList(refreshments, transactions);
+        SalesReport.writeSalesReport(salesReport);
 
         // assert
         Assert.assertTrue(salesReportFile.exists());
