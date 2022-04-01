@@ -3,8 +3,8 @@ package com.techelevator;
 import com.techelevator.machine.processing.ItemReader;
 import com.techelevator.machine.processing.SalesReport;
 import com.techelevator.machine.refreshments.Refreshment;
-import com.techelevator.ui.ChangeDrawer;
-import com.techelevator.ui.Transaction;
+import com.techelevator.ui.CashMachine;
+import com.techelevator.machine.processing.Transaction;
 import com.techelevator.ui.UserInput;
 import com.techelevator.view.Menu;
 
@@ -19,7 +19,7 @@ public class CaTEringCapstoneCLI
 {
 
 	private static final String SOURCE_FILE_NAME = "catering.csv";
-	ChangeDrawer changeDrawer = new ChangeDrawer();
+	CashMachine cashMachine = new CashMachine();
 	File sourceFile = new File(SOURCE_FILE_NAME);
 	List<Refreshment> refreshments = ItemReader.getRefreshments(sourceFile);
 	List<Transaction> transactions = new ArrayList<Transaction>();
@@ -103,7 +103,7 @@ public class CaTEringCapstoneCLI
 				double input = Double.parseDouble(UserInput.getMoneyInput());
 				Transaction transaction = new Transaction(true, BigDecimal.valueOf(input));
 				transactions.add(transaction);
-				changeDrawer.putMoney(transaction);
+				cashMachine.putMoney(transaction);
 			}
 			catch (Exception e)
 			{
@@ -118,11 +118,11 @@ public class CaTEringCapstoneCLI
 			{
 				displayItems();
 				String input = UserInput.getItemSelection();
-				Refreshment refreshment = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, input);
+				Refreshment refreshment = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, input);
 				if (!refreshment.equals(null))
 				{
 					Transaction transaction = new Transaction(true, refreshment.getPrice(), refreshment);
-					changeDrawer.buyProduct(transaction);
+					cashMachine.buyProduct(transaction);
 					transactions.add(transaction);
 					refreshment.setQuantity(refreshment.getQuantity() - 1);
 				}
@@ -138,7 +138,7 @@ public class CaTEringCapstoneCLI
 		else if (choice.equals("f"))
 		{
 			Transaction transaction = new Transaction(false, BigDecimal.valueOf(0));
-			changeDrawer.giveChange(transaction);
+			cashMachine.giveChange(transaction);
 			transactions.add(transaction);
 			run();
 		}

@@ -1,19 +1,18 @@
 package com.techelevator.ui;
 
 import com.techelevator.machine.processing.Log;
-import com.techelevator.machine.refreshments.Refreshment;
+import com.techelevator.machine.processing.Transaction;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
-public class ChangeDrawer {
+public class CashMachine {
     static final BigDecimal ZERO = new BigDecimal(0);
 
     // attributes
     public static BigDecimal balance = ZERO;
 
     // constructors
-    public ChangeDrawer()
+    public CashMachine()
     {
         this.balance = ZERO;
     }
@@ -36,7 +35,7 @@ public class ChangeDrawer {
         return balance;
     }
 
-    public static void buyProduct(Transaction transaction)
+    public static BigDecimal buyProduct(Transaction transaction)
     {
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
 
@@ -55,10 +54,11 @@ public class ChangeDrawer {
             Log log = new Log(transaction, balance);
             log.writeLogEntry();
         }
+        return balance;
     }
 
     // methods
-    public static void giveChange(Transaction transaction)
+    public static BigDecimal giveChange(Transaction transaction)
     {
         BigDecimal pending = balance.subtract(transaction.getDollarAmount());
         BigDecimal change = ZERO;
@@ -95,5 +95,7 @@ public class ChangeDrawer {
         Transaction changeGiven = new Transaction(false, change);
         Log log = new Log(changeGiven, balance);
         log.writeLogEntry();
+
+        return change;
     }
 }

@@ -26,7 +26,7 @@ public class UserInput
         System.out.println("(S) Select Item ");
         System.out.println("(F) Finish Transaction ");
         System.out.println();
-        System.out.println("Your current balance is: " + String.valueOf(ChangeDrawer.getBalance()));
+        System.out.println("Your current balance is: " + String.valueOf(CashMachine.getBalance()));
         System.out.println();
         System.out.print("Please select an option ");
 

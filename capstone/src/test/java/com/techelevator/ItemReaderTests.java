@@ -3,15 +3,13 @@ package com.techelevator;
 import com.techelevator.machine.processing.ItemReader;
 import com.techelevator.machine.refreshments.Munchy;
 import com.techelevator.machine.refreshments.Refreshment;
-import com.techelevator.ui.ChangeDrawer;
-import com.techelevator.ui.Transaction;
-import org.junit.Assert;
+import com.techelevator.ui.CashMachine;
+import com.techelevator.machine.processing.Transaction;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class ItemReaderTests {
 
     String SOURCE_FILE_NAME = "catering.csv";
-    ChangeDrawer changeDrawer = new ChangeDrawer();
+    CashMachine cashMachine = new CashMachine();
     File sourceFile = new File(SOURCE_FILE_NAME);
     List<Refreshment> refreshments = ItemReader.getRefreshments(sourceFile);
 
@@ -33,7 +31,7 @@ public class ItemReaderTests {
         String message = "Error - finding an item where no slot machine location exists";
 
         // act
-        Refreshment actual = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, slotLocation);
+        Refreshment actual = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, slotLocation);
 
         // assert
         assertEquals(message, expected, actual);
@@ -51,7 +49,7 @@ public class ItemReaderTests {
         String message = "Error - finding an item when item is no longer available";
 
         // act
-        Refreshment actual = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, slotLocation);
+        Refreshment actual = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, slotLocation);
 
         // assert
         assertEquals(message, expected, actual);
@@ -65,10 +63,10 @@ public class ItemReaderTests {
         Refreshment refreshment = new Munchy(slotLocation, "testmunchy", new BigDecimal(4.20), "Munchy");
         refreshments.add(refreshment);
         Refreshment expected = null;
-        String message = "Error - successfully purchasing an item when changeDrawer doesn't have enough moeny";
+        String message = "Error - successfully purchasing an item when cashMachine doesn't have enough money";
 
         // act
-        Refreshment actual = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, slotLocation);
+        Refreshment actual = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, slotLocation);
 
         // assert
         assertEquals(message, expected, actual);
@@ -82,12 +80,12 @@ public class ItemReaderTests {
         Refreshment refreshment = new Munchy(slotLocation, "testmunchy", new BigDecimal(4.20), "Munchy");
         refreshments.add(refreshment);
         Transaction transaction = new Transaction(true, new BigDecimal(5));
-        changeDrawer.putMoney(transaction);
+        cashMachine.putMoney(transaction);
         Refreshment expected = refreshment;
         String message = "Error - failing to purchase an item when all needed conditions are met";
 
         // act
-        Refreshment actual = ItemReader.getRefreshmentByItemLocation(changeDrawer, refreshments, slotLocation);
+        Refreshment actual = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, slotLocation);
 
         // assert
         assertEquals(message, expected, actual);
@@ -141,9 +139,12 @@ public class ItemReaderTests {
         boolean actual = true;
 
         for (int i = 0; i < actualRefreshments.size(); i++) {
-            if(actualRefreshments.get(i).getName() != refreshments.get(i).getName())
+            if(!actualRefreshments.get(i).getName().equals((expectedRefreshments.get(i).getName())))
             {
-                actual = false;
+                if (!actualRefreshments.get(i).getType().equals((expectedRefreshments.get(i).getType())))
+                {
+                    actual = false;
+                }
             }
         }
 

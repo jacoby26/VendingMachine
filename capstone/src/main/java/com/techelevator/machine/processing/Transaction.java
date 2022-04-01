@@ -1,4 +1,4 @@
-package com.techelevator.ui;
+package com.techelevator.machine.processing;
 
 import com.techelevator.interfaces.Purchasable;
 

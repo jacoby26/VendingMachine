@@ -1,8 +1,6 @@
 package com.techelevator.machine.processing;
 
-import com.techelevator.interfaces.Purchasable;
 import com.techelevator.machine.refreshments.Refreshment;
-import com.techelevator.ui.Transaction;
 
 import java.io.*;
 import java.util.ArrayList;

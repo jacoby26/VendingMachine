@@ -1,8 +1,5 @@
 package com.techelevator.machine.processing;
 
-import com.techelevator.interfaces.Purchasable;
-import com.techelevator.ui.Transaction;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

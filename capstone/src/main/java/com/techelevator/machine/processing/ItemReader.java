@@ -1,14 +1,13 @@
 package com.techelevator.machine.processing;
 
 import com.techelevator.machine.refreshments.*;
-import com.techelevator.ui.ChangeDrawer;
+import com.techelevator.ui.CashMachine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ItemReader {
@@ -19,7 +18,7 @@ public class ItemReader {
     // getters and setters
 
     // methods
-    public static Refreshment getRefreshmentByItemLocation(ChangeDrawer changeDrawer, List<Refreshment> refreshments, String itemLocation)
+    public static Refreshment getRefreshmentByItemLocation(CashMachine cashMachine, List<Refreshment> refreshments, String itemLocation)
     {
         for(Refreshment refreshment : refreshments)
         {
@@ -27,7 +26,7 @@ public class ItemReader {
             {
                 if(refreshment.inStock())
                 {
-                    if(changeDrawer.balance.compareTo(refreshment.getPrice()) >= 0)
+                    if(cashMachine.balance.compareTo(refreshment.getPrice()) >= 0)
                     {
                         return refreshment;
                     }
@@ -61,29 +60,27 @@ public class ItemReader {
                     String stringPrice = properties[3];
                     BigDecimal price = new BigDecimal(stringPrice);
 
-                    if (type.equals("Munchy"))
-                    {
-                        Munchy munchy = new Munchy(slotLocation, itemName, price, type);
-                        refreshments.add(munchy);
-                    }
-                    else if (type.equals("Sandwich"))
-                    {
-                        Sandwich sandwich = new Sandwich(slotLocation, itemName, price, type);
-                        refreshments.add(sandwich);
-                    }
-                    else if (type.equals("Drink"))
-                    {
-                        Drink drink = new Drink(slotLocation, itemName, price, type);
-                        refreshments.add(drink);
-                    }
-                    else if (type.equals("Dessert"))
-                    {
-                        Dessert dessert = new Dessert(slotLocation, itemName, price, type);
-                        refreshments.add(dessert);
-                    }
-                    else
-                    {
-                        // do nothing
+
+                    switch (type) {
+                        case "Munchy":
+                            Munchy munchy = new Munchy(slotLocation, itemName, price, type);
+                            refreshments.add(munchy);
+                            break;
+                        case "Sandwich":
+                            Sandwich sandwich = new Sandwich(slotLocation, itemName, price, type);
+                            refreshments.add(sandwich);
+                            break;
+                        case "Drink":
+                            Drink drink = new Drink(slotLocation, itemName, price, type);
+                            refreshments.add(drink);
+                            break;
+                        case "Dessert":
+                            Dessert dessert = new Dessert(slotLocation, itemName, price, type);
+                            refreshments.add(dessert);
+                            break;
+                        default:
+                            break;
+                            // do nothing
                     }
                 }
                 catch (Exception e)

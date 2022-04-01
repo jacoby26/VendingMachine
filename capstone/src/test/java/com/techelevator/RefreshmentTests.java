@@ -2,8 +2,6 @@ package com.techelevator;
 
 import com.techelevator.machine.processing.ItemReader;
 import com.techelevator.machine.refreshments.*;
-import com.techelevator.ui.ChangeDrawer;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
