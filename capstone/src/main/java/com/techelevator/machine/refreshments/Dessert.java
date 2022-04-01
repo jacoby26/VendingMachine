@@ -11,8 +11,8 @@ public class Dessert extends Refreshment
     }
 
     @Override
-    public void printMessage()
+    public String printMessage()
     {
-        System.out.println("Sugar, Sugar, so Sweet!");
+        return "Sugar, Sugar, so Sweet!";
     }
 }

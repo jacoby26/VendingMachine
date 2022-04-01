@@ -11,8 +11,8 @@ public class Sandwich extends Refreshment
     }
 
     @Override
-    public void printMessage()
+    public String printMessage()
     {
-        System.out.println("Sandwich So Delicious, Yum!");
+        return "Sandwich So Delicious, Yum!";
     }
 }

@@ -11,8 +11,8 @@ public class Drink extends Refreshment
     }
 
     @Override
-    public void printMessage()
+    public String printMessage()
     {
-        System.out.println("Drinky, Drinky, Slurp Slurp!");
+        return "Drinky, Drinky, Slurp Slurp!";
     }
 }

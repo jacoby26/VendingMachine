@@ -13,8 +13,8 @@ public class Munchy extends Refreshment
 
     // methods
     @Override
-    public void printMessage()
+    public String printMessage()
     {
-        System.out.println("Munchy, Munchy so Good!");
+        return "Munchy, Munchy so Good!";
     }
 }

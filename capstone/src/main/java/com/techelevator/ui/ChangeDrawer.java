@@ -50,7 +50,7 @@ public class ChangeDrawer {
             System.out.println(transaction.getPurchasable().getName());
             System.out.println("Price $" + transaction.getPurchasable().getPrice());
             System.out.println("Your current balance is $" + balance);
-            // System.out.println(transaction.getPurchasable().printMessage());
+            System.out.println(transaction.getPurchasable().printMessage());
             // giveChange(transaction);
         }
     }

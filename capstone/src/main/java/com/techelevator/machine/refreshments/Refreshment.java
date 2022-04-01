@@ -55,13 +55,8 @@ public abstract class Refreshment implements Purchasable
     // methods
     public boolean inStock()
     {
-        if (quantity > 0)
-        {
-            return true;
-        }
-
-        return false;
+        return quantity > 0;
     }
 
-    public abstract void printMessage();
+    public abstract String printMessage();
 }
