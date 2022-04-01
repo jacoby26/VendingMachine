@@ -138,7 +138,14 @@ public class ItemReaderTests {
 
         // act
         List<Refreshment> actualRefreshments = ItemReader.getRefreshments(sourceFile);
-        boolean actual = actualRefreshments.equals(expectedRefreshments);
+        boolean actual = true;
+
+        for (int i = 0; i < actualRefreshments.size(); i++) {
+            if(actualRefreshments.get(i).getName() != refreshments.get(i).getName())
+            {
+                actual = false;
+            }
+        }
 
         // assert
         assertEquals(message, expected, actual);
