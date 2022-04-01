@@ -121,7 +121,7 @@ public class CaTEringCapstoneCLI
 				Refreshment refreshment = ItemReader.getRefreshmentByItemLocation(cashMachine, refreshments, input);
 				if (!refreshment.equals(null))
 				{
-					Transaction transaction = new Transaction(true, refreshment.getPrice(), refreshment);
+					Transaction transaction = new Transaction(false, refreshment.getPrice(), refreshment);
 					cashMachine.buyProduct(transaction);
 					transactions.add(transaction);
 					refreshment.setQuantity(refreshment.getQuantity() - 1);

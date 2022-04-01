@@ -2,6 +2,7 @@ package com.techelevator.ui;
 
 import com.techelevator.machine.processing.Log;
 import com.techelevator.machine.processing.Transaction;
+import com.techelevator.machine.refreshments.PopTart;
 
 import java.math.BigDecimal;
 

@@ -15,7 +15,14 @@ public class UserInput
         System.out.println();
         System.out.print("Please select an option ");
 
-        return input.nextLine().trim().toLowerCase().substring(0, 1);
+        try
+        {
+            return input.nextLine().trim().toLowerCase().substring(0, 1);
+        }
+        catch (Exception e)
+        {
+            return "";
+        }
     }
 
     public static String getPurchasingScreenChoice()
@@ -25,13 +32,18 @@ public class UserInput
         System.out.println("(S) Select Item ");
         System.out.println("(F) Finish Transaction ");
         System.out.println();
-        System.out.println("Your current balance is: " + String.valueOf(CashMachine.getBalance()));
+        System.out.println("Your current balance is: $" + String.valueOf(CashMachine.getBalance()));
         System.out.println();
         System.out.print("Please select an option ");
 
-
-        return input.nextLine().trim().toLowerCase().substring(0,1);
-
+        try
+        {
+            return input.nextLine().trim().toLowerCase().substring(0,1);
+        }
+        catch (Exception e)
+        {
+            return "";
+        }
     }
 
     public static String getMoneyInput()
@@ -64,7 +76,14 @@ public class UserInput
         System.out.println();
         System.out.println("Enter the slot location of the item you would like to purchase. ");
 
-        return input.nextLine().trim().toLowerCase().substring(0,2);
+        try
+        {
+            return input.nextLine().trim().toLowerCase().substring(0,2);
+        }
+        catch (Exception e)
+        {
+            return "";
+        }
     }
 
 }
