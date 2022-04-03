@@ -50,7 +50,6 @@ public class CaTEringCapstoneCLI
 			else if (choice.equals("p"))
 			{
 				displayPurchaseMenu();
-				run();
 			}
 			else if (choice.equals("e"))
 			{

@@ -2,11 +2,8 @@ package com.techelevator.ui;
 
 import com.techelevator.machine.processing.Log;
 import com.techelevator.machine.processing.Transaction;
-import com.techelevator.machine.refreshments.PopTart;
-import com.techelevator.view.Color;
 import com.techelevator.view.ColorDesignator;
 
-import java.awt.*;
 import java.math.BigDecimal;
 
 public class CashMachine {
