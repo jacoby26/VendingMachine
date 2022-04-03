@@ -3,7 +3,10 @@ package com.techelevator.ui;
 import com.techelevator.machine.processing.Log;
 import com.techelevator.machine.processing.Transaction;
 import com.techelevator.machine.refreshments.PopTart;
+import com.techelevator.view.Color;
+import com.techelevator.view.ColorDesignator;
 
+import java.awt.*;
 import java.math.BigDecimal;
 
 public class CashMachine {
@@ -47,10 +50,10 @@ public class CashMachine {
                 if (pending.compareTo(ZERO) >= 0)
                 {
                     balance = balance.subtract(transaction.getDollarAmount());
-                    System.out.println(transaction.getPurchasable().getName());
-                    System.out.println("Price $" + transaction.getPurchasable().getPrice());
-                    System.out.println("Your current balance is $" + balance);
-                    System.out.println(transaction.getPurchasable().printMessage());
+                    System.out.println(ColorDesignator.Yellow + transaction.getPurchasable().getName() + ColorDesignator.Reset);
+                    System.out.println(ColorDesignator.Purple + "Price " + ColorDesignator.Reset + ColorDesignator.Red + "$" + transaction.getPurchasable().getPrice() + ColorDesignator.Reset);
+                    System.out.println(ColorDesignator.Purple + "Your current balance is " + ColorDesignator.Reset + ColorDesignator.Green + "$" + balance + ColorDesignator.Reset);
+                    System.out.println(ColorDesignator.Yellow + transaction.getPurchasable().printMessage() + ColorDesignator.Reset);
                     // giveChange(transaction);
                     Log log = new Log(transaction, balance);
                     log.writeLogEntry();
@@ -80,7 +83,7 @@ public class CashMachine {
             {
                 change = balance.subtract(transaction.getDollarAmount());
 
-                System.out.println("Your change is $" + change);
+                System.out.println(ColorDesignator.Purple + "Your change is " + ColorDesignator.Reset + ColorDesignator.Green + "$" +  change + ColorDesignator.Reset);
 
                 int dollars = (int)Math.floor(Double.parseDouble(balance.toString()));
                 BigDecimal coinChange = change.subtract(new BigDecimal(dollars));

@@ -89,7 +89,7 @@ public class SalesReport
         {
             salesReport.forEach((key, value) -> {
 
-                String reportEntry = key + "," + value;
+                String reportEntry = key + ", " + value;
                 writer.println(reportEntry);
             });
         }

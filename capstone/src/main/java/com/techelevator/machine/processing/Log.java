@@ -26,11 +26,11 @@ public class Log
         {
             if(transaction.isMoneyIn())
             {
-                this.note = "MONEY FED: ";
+                this.note = "MONEY FED:  ";
             }
             else
             {
-                this.note = "CHANGE GIVEN: ";
+                this.note = "CHANGE GIVEN:  ";
             }
         }
         else
@@ -46,14 +46,13 @@ public class Log
     public String getNote() {
         return note;
     }
-
     public String getSlotLocation() {
         return slotLocation;
     }
 
     // methods
     public String getTimestamp() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         String formatDateTime = timestamp.format(formatter);
         return formatDateTime;
     }
@@ -82,9 +81,10 @@ public class Log
 
         )
         {
-            String logEntry = getTimestamp() + "," +
-                            getNote() + "   " + getSlotLocation() + "," +
-                            getTransactionAmount() + "," +
+            String logEntry = getTimestamp() + "\t" +
+                            String.format("%-20s", getNote()) + "\t" +
+                            getSlotLocation() + "\t" +
+                            getTransactionAmount() + "\t" +
                             getEndBalance() + "\n";
 
             writer.println(logEntry);
