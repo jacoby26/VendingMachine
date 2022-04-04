@@ -84,7 +84,7 @@ public class Log
             String logEntry = getTimestamp() + "\t" +
                             String.format("%-20s", getNote()) + "\t" +
                             getSlotLocation() + "\t" +
-                            getTransactionAmount() + "\t" +
+                            String.format("%-5s", getTransactionAmount()) + "\t" +
                             getEndBalance() + "\n";
 
             writer.println(logEntry);
